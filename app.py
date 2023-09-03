@@ -50,10 +50,8 @@ def get_path(*args):
     get path by keywords
     """
 
-    target_folder = "O:/Miuruwa"
-    target_path_norm = os.path.normpath(target_folder)
-
-    response = os.path.join(target_path_norm, *args)
+    target_folder = os.getcwd()
+    response = os.path.join(target_folder, *args)
 
     return response
 
