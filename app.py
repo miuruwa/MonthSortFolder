@@ -5,19 +5,21 @@ pyinstaller --noconfirm --onefile --windowed  "main.py"
 """
 
 from datetime import datetime
+from enum import Enum
 import os
 from pathlib import Path
 import sys
 import shutil
 
+class Month(Enum):
+    """
+    Month by it's number
+    """
 
-month = {
-    12: "December", 1: "January", 2: "February",
-    3: "March", 4: "April", 5: "May",
-    6: "June", 7: "July", 8: "August",
-    9: "September", 10: "October", 11: "November",
-}
-
+    DECEMBER = 12; JANUARY = 1; FEBRUARY = 2
+    MARCH = 3; APRIL = 4; MAY = 5
+    JUNE = 6; JULY = 7; AUGUST = 8
+    SEPTEMBER = 9; OCTOBER = 10; NOVEMBER = 11
 
 def check_folder(path):
     """
@@ -30,7 +32,7 @@ def check_folder(path):
 
 CURRENT_YEAR = str(datetime.now().year)
 CURRENT_MONTH_NUM = datetime.now().month
-CURRENT_MONTH = month[CURRENT_MONTH_NUM]
+CURRENT_MONTH = Month(CURRENT_MONTH_NUM).name.capitalize()
 
 SEPARATOR = os.path.sep
 YEAR_PATH = SEPARATOR.join(["O:\\Miuruwa", CURRENT_YEAR])
