@@ -45,6 +45,19 @@ def get_current_date():
     return current_year, current_month
 
 
+def get_path(*args):
+    """
+    get path by keywords
+    """
+
+    target_folder = "O:/Miuruwa"
+    target_path_norm = os.path.normpath(target_folder)
+
+    response = os.path.join(target_path_norm, *args)
+
+    return response
+
+
 def check_folder(path):
     """
     check folder if it exists and create it
@@ -56,9 +69,8 @@ def check_folder(path):
 
 CURRENT_YEAR, CURRENT_MONTH = get_current_date()
 
-SEPARATOR = os.path.sep
-YEAR_PATH = SEPARATOR.join(["O:\\Miuruwa", CURRENT_YEAR])
-MONTH_PATH = SEPARATOR.join(["O:\\Miuruwa", CURRENT_YEAR, CURRENT_MONTH])
+YEAR_PATH = get_path(CURRENT_YEAR)
+MONTH_PATH = get_path(CURRENT_YEAR, CURRENT_MONTH)
 
 check_folder(YEAR_PATH)
 check_folder(MONTH_PATH)
@@ -72,5 +84,5 @@ if OPEN_ACTUAL_FOLDER:
 
 elif MOVE_FILE_OR_DIR:
     file_name = Path(sys.argv[1]).name
-    TARGET_PATH = SEPARATOR.join([MONTH_PATH, file_name])
+    TARGET_PATH = get_path(CURRENT_YEAR, CURRENT_MONTH, file_name)
     shutil.move(sys.argv[1], TARGET_PATH)
