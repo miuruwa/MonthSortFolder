@@ -29,6 +29,22 @@ class Month(Enum):
     OCTOBER = 10
     NOVEMBER = 11
 
+
+def get_current_date():
+    """
+    Get current year and month
+    """
+
+    moment = datetime.now()
+
+    current_year = str(moment.year)
+    current_month_num = moment.month
+    current_month_enum = Month(current_month_num)
+    current_month = current_month_enum.name.capitalize()
+
+    return current_year, current_month
+
+
 def check_folder(path):
     """
     check folder if it exists and create it
@@ -38,9 +54,7 @@ def check_folder(path):
         os.mkdir(path)
 
 
-CURRENT_YEAR = str(datetime.now().year)
-CURRENT_MONTH_NUM = datetime.now().month
-CURRENT_MONTH = Month(CURRENT_MONTH_NUM).name.capitalize()
+CURRENT_YEAR, CURRENT_MONTH = get_current_date()
 
 SEPARATOR = os.path.sep
 YEAR_PATH = SEPARATOR.join(["O:\\Miuruwa", CURRENT_YEAR])
