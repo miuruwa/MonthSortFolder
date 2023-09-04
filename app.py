@@ -65,6 +65,26 @@ def check_folder(path):
         os.mkdir(path)
 
 
+def is_move_multiple():
+    """
+    check if multiple paths needed to be moved and check for exist    
+    """
+
+    if len(sys.argv) <= 2:
+        return False
+
+    return False not in map(os.path.exists, sys.argv[1:])
+
+
+def get_target_path(path: str):
+    """
+    get target path for given object path
+    """
+
+    object_name = Path(path).name
+    return get_path(CURRENT_YEAR, CURRENT_MONTH, object_name)
+
+
 CURRENT_YEAR, CURRENT_MONTH = get_current_date()
 
 YEAR_PATH = get_path(CURRENT_YEAR)
@@ -75,7 +95,7 @@ check_folder(MONTH_PATH)
 
 OPEN_ACTUAL_FOLDER = len(sys.argv) == 1
 MOVE_FILE_OR_DIR = len(sys.argv) == 2 and os.path.exists(sys.argv[1])
-
+IS_MOVE_MULTIPLE = is_move_multiple()
 
 if OPEN_ACTUAL_FOLDER:
     os.startfile(MONTH_PATH)
@@ -84,3 +104,9 @@ elif MOVE_FILE_OR_DIR:
     file_name = Path(sys.argv[1]).name
     TARGET_PATH = get_path(CURRENT_YEAR, CURRENT_MONTH, file_name)
     shutil.move(sys.argv[1], TARGET_PATH)
+
+elif IS_MOVE_MULTIPLE:
+    mapped_paths = map(get_target_path, sys.argv[1:])
+
+    for original_path, target_path in zip(sys.argv[1:], mapped_paths):
+        shutil.move(original_path, target_path)
