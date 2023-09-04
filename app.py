@@ -97,16 +97,25 @@ def get_target_path(object_path: str = None):
     return month_path
 
 
-MONTH_PATH = get_target_path()
+def main():
+    """
+    main function
+    """
 
-IS_OPEN_TARGET_FOLDER = len(sys.argv) == 1
-IS_MOVE_OBJECTS_TO_TARGET = is_move_multiple()
+    target_path = get_target_path()
 
-if IS_OPEN_TARGET_FOLDER:
-    os.startfile(MONTH_PATH)
+    is_open = len(sys.argv) == 1
+    is_move = is_move_multiple()
 
-elif IS_MOVE_OBJECTS_TO_TARGET:
-    mapped_paths = map(get_target_path, sys.argv[1:])
+    if is_open:
+        os.startfile(target_path)
 
-    for original_path, target_path in zip(sys.argv[1:], mapped_paths):
-        shutil.move(original_path, target_path)
+    elif is_move:
+        mapped_paths = map(get_target_path, sys.argv[1:])
+
+        for original_path, target_path in zip(sys.argv[1:], mapped_paths):
+            shutil.move(original_path, target_path)
+
+
+if __name__ == "__main__":
+    main()
