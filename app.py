@@ -65,7 +65,7 @@ def check_folder(path):
         os.mkdir(path)
 
 
-def is_move_multiple():
+def is_move_files():
     """
     check if multiple paths needed to be moved and check for exist    
     """
@@ -105,7 +105,7 @@ def main():
     target_path = get_target_path()
 
     is_open = len(sys.argv) == 1
-    is_move = is_move_multiple()
+    is_move = is_move_files()
 
     if is_open:
         os.startfile(target_path)
