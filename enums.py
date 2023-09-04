@@ -1,3 +1,7 @@
+"""
+Enums file
+"""
+
 from enum import Enum
 
 
