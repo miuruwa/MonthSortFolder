@@ -5,29 +5,12 @@ pyinstaller --noconfirm --onefile --windowed  "main.py"
 """
 
 from datetime import datetime
-from enum import Enum
 import os
 from pathlib import Path
 import sys
 import shutil
 
-class Month(Enum):
-    """
-    Month by it's number
-    """
-
-    DECEMBER = 12
-    JANUARY = 1
-    FEBRUARY = 2
-    MARCH = 3
-    APRIL = 4
-    MAY = 5
-    JUNE = 6
-    JULY = 7
-    AUGUST = 8
-    SEPTEMBER = 9
-    OCTOBER = 10
-    NOVEMBER = 11
+from enums import Month
 
 
 def get_current_date():
