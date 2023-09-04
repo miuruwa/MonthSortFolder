@@ -93,13 +93,13 @@ MONTH_PATH = get_path(CURRENT_YEAR, CURRENT_MONTH)
 check_folder(YEAR_PATH)
 check_folder(MONTH_PATH)
 
-OPEN_ACTUAL_FOLDER = len(sys.argv) == 1
-IS_MOVE_MULTIPLE = is_move_multiple()
+IS_OPEN_TARGET_FOLDER = len(sys.argv) == 1
+IS_MOVE_OBJECTS_TO_TARGET = is_move_multiple()
 
-if OPEN_ACTUAL_FOLDER:
+if IS_OPEN_TARGET_FOLDER:
     os.startfile(MONTH_PATH)
 
-elif IS_MOVE_MULTIPLE:
+elif IS_MOVE_OBJECTS_TO_TARGET:
     mapped_paths = map(get_target_path, sys.argv[1:])
 
     for original_path, target_path in zip(sys.argv[1:], mapped_paths):
