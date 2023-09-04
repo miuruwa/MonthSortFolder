@@ -76,22 +76,28 @@ def is_move_multiple():
     return False not in map(os.path.exists, sys.argv[1:])
 
 
-def get_target_path(path: str):
+def get_target_path(object_path: str = None):
     """
-    get target path for given object path
+    get path to folder that needed to be opened or to move to  
+    if object path is given then returns new path after moving process  
     """
 
-    object_name = Path(path).name
-    return get_path(CURRENT_YEAR, CURRENT_MONTH, object_name)
+    current_year, current_month = get_current_date()
+
+    year_path = get_path(current_year)
+    check_folder(year_path)
+
+    if object_path:
+        object_name = Path(object_path).name
+        return get_path(current_year, current_month, object_name)
+
+    month_path = get_path(current_year, current_month)
+    check_folder(month_path)
+
+    return month_path
 
 
-CURRENT_YEAR, CURRENT_MONTH = get_current_date()
-
-YEAR_PATH = get_path(CURRENT_YEAR)
-MONTH_PATH = get_path(CURRENT_YEAR, CURRENT_MONTH)
-
-check_folder(YEAR_PATH)
-check_folder(MONTH_PATH)
+MONTH_PATH = get_target_path()
 
 IS_OPEN_TARGET_FOLDER = len(sys.argv) == 1
 IS_MOVE_OBJECTS_TO_TARGET = is_move_multiple()
