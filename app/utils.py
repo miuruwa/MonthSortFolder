@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 import sys
 
-from enums import Month
+from .enums import Month
 
 
 def get_current_date():
