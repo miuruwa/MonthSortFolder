@@ -1,12 +1,13 @@
 """
-application behaviour
+create actual month folder
 """
 
 import os
 import shutil
 import sys
 
-from .utils import get_target_path, is_move_files
+from utils import get_target_path, is_move_files
+
 
 def main():
     """
@@ -26,3 +27,6 @@ def main():
 
         for original_path, target_path in zip(sys.argv[1:], mapped_paths):
             shutil.move(original_path, target_path)
+
+if __name__ == "__main__":
+    main()
