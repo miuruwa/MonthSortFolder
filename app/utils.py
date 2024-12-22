@@ -21,8 +21,9 @@ def get_current_date():
     current_month_num = moment.month
     current_month_enum = Month(current_month_num)
     current_month = current_month_enum.name.capitalize()
+    current_month_folder_name = f"{current_month_num}. {current_month}"
 
-    return current_year, current_month
+    return current_year, current_month_folder_name
 
 
 def get_path(*args):
